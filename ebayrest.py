@@ -29,6 +29,7 @@ class Client():
         self.sandbox = sandbox
 
         self.inventory = resources.Inventory(self)
+        self.fulfillment = resources.Fulfillment(self)
 
     def get_base(self):
         """Return the base endpoint for the eBay URL.

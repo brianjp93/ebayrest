@@ -108,6 +108,23 @@ class Fulfillment():
 		r = requests.get(url, headers=self.get_headers(), params=params)
 		return r
 
+	def get_shipping_fulfillment(self, order_id, fulfillment_id):
+		"""Get specific fulfillment data.
+
+		Parameters
+		----------
+		order_id : str
+		fulfillment_id : str
+
+		Returns
+		-------
+		Response
+
+		"""
+		url = '{}order/{}/shipping_fulfillment/{}'.format(self.get_base(), order_id, fulfillment_id)
+		r = requests.get(url, headers=self.get_headers())
+		return r
+
 	def get_shipping_fulfillments(self, order_id):
 		"""Get shipping fulfillments for an order.
 
@@ -122,4 +139,35 @@ class Fulfillment():
 		"""
 		url = '{}order/{}/shipping_fulfillment'.format(self.get_base(), order_id)
 		r = requests.get(url, headers=self.get_headers())
+		return r
+
+	def create_shipping_fulfillment(self, order_id, data):
+		"""Create shipping fulfillment.
+
+		https://developer.ebay.com/api-docs/sell/fulfillment/resources/order/shipping_fulfillment/methods/createShippingFulfillment
+
+		Parameters
+		----------
+		order_id : str
+		data : dict
+			example : 
+				{
+					"lineItems" : [
+						{
+							"lineItemId" : "string",
+							"quantity" : "integer"
+						}
+					],
+					"shippedDate" : "string",
+					"shippingCarrierCode" : "string",
+					"trackingNumber" : "string"
+				}
+
+		Returns
+		-------
+		Response
+
+		"""
+		url = '{}order/{}/shipping_fulfillment'.format(self.get_base(), order_id)
+		r = requests.post(url, headers=self.get_headers(), json=data)
 		return r
