@@ -1,5 +1,6 @@
 """ebayrest.py
 """
+from __future__ import absolute_import
 import requests
 import resources
 import base64
@@ -137,7 +138,7 @@ class Client():
         req = requests.Request('GET', url, params=params)
         prepped = req.prepare()
         url = prepped.url + '&scope={}'.format(scope)
-        return prepped.url
+        return url
 
     def get_user_token(self, code, redirect_uri):
         """Makes request to eBay for a User Token.
